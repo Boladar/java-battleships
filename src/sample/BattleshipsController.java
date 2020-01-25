@@ -8,7 +8,7 @@ import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
@@ -20,12 +20,13 @@ public class BattleshipsController implements Initializable {
     @FXML
     private GridPane playerBoard;
 
-    private final int GRID_HEIGHT = 500;
-    private final int GRID_WIDTH = 500;
+    @FXML
+    private GridPane enemyBoard;
 
     private final int GRID_SIZE = 10;
-    private final int TILE_SIZE = 50;
+    private final int TILE_SIZE = 500;
 
+    private OnClickController onClickController;
 
     private Label createFieldLabel(String text){
         Label label = new Label();
@@ -42,6 +43,9 @@ public class BattleshipsController implements Initializable {
 
     private void populateGrid(GridPane target){
 
+        target.setMaxSize(TILE_SIZE*GRID_SIZE,TILE_SIZE*GRID_SIZE);
+        target.setPrefSize(TILE_SIZE,TILE_SIZE);
+
         for(int i =0; i <= GRID_SIZE;i++){
             for(int j = 0; j <= GRID_SIZE;j++){
                 if( i == 0 && j != 0){
@@ -51,22 +55,19 @@ public class BattleshipsController implements Initializable {
                     target.add(createFieldLabel(String.valueOf((char)(i - 1 + 'A'))),i,j);
                 }
                 else{
-                    target.add(new ShipPart(TILE_SIZE,TILE_SIZE,Color.WHITE),i,j);
+                    Pane pane = new Pane();
+                    target.add(pane,i,j);
                 }
             }
         }
-
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println("hello world");
 
-        playerBoard.setMaxHeight(GRID_HEIGHT);
-        playerBoard.setMaxWidth(GRID_WIDTH);
-
         populateGrid(playerBoard);
-
+        populateGrid(enemyBoard);
     }
 
     public void clickGrid(MouseEvent event){

@@ -1,14 +1,83 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="720.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.BattleshipsController">
    <children>
-      <HBox layoutX="387.0" layoutY="310.0" prefHeight="720.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox prefHeight="720.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <GridPane fx:id="playerBoard" gridLinesVisible="true">
+            <MenuBar>
+              <menus>
+                <Menu mnemonicParsing="false" text="File">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Close" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Edit">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="Delete" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem mnemonicParsing="false" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <HBox alignment="CENTER">
+               <children>
+                  <Label fx:id="timerLabel" alignment="CENTER" contentDisplay="CENTER" text="00:00" textAlignment="CENTER">
+                     <font>
+                        <Font name="Courier New Bold" size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+               <VBox.margin>
+                  <Insets top="15.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" spacing="20.0">
+               <children>
+                  <TitledPane alignment="CENTER" contentDisplay="CENTER" text="ALLIED FLEET" textAlignment="CENTER">
+                     <content>
+                        <GridPane fx:id="playerBoard" alignment="CENTER" gridLinesVisible="true">
       </GridPane>
+                     </content>
+                     <font>
+                        <Font name="Courier New" size="20.0" />
+                     </font>
+                  </TitledPane>
+                  <Separator orientation="VERTICAL" prefHeight="200.0" style="-fx-background-color: black; -fx-border-radius: 2;" />
+                  <TitledPane alignment="CENTER" contentDisplay="CENTER" text="ENEMY FLEET" textAlignment="CENTER">
+                     <content>
+                        <GridPane fx:id="enemyBoard" alignment="CENTER" gridLinesVisible="true" />
+                     </content>
+                     <font>
+                        <Font name="Courier New" size="20.0" />
+                     </font>
+                  </TitledPane>
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER">
+               <children>
+                  <Button fx:id="endTurnButton" alignment="CENTER" mnemonicParsing="false" text="END TURN" textAlignment="CENTER">
+                     <font>
+                        <Font name="Courier New" size="20.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
          </children>
-      </HBox>
+      </VBox>
    </children>
 </AnchorPane>
