@@ -3,12 +3,13 @@ package sample;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.paint.Color;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -29,6 +30,9 @@ public class FleetSetupController implements Initializable {
     private RadioButton battleshipRadio;
     @FXML
     private RadioButton carrierRadio;
+
+    @FXML
+    private Button doneButton;
 
     private ToggleGroup shipChoice;
     private Ship currentShip;
@@ -67,6 +71,10 @@ public class FleetSetupController implements Initializable {
         });
 
         GridUtils.populateGrid(fleetGridPane,battleshipsController.getTILE_SIZE(),battleshipsController.getGRID_SIZE());
+
+        doneButton.setOnAction(actionEvent -> {
+            //currentPlayer =
+        });
     }
 
     private void updateGrid(Player player){
