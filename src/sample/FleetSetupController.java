@@ -1,18 +1,16 @@
 package sample;
 
-        import javafx.beans.value.ChangeListener;
-        import javafx.beans.value.ObservableValue;
-        import javafx.fxml.FXML;
-        import javafx.fxml.Initializable;
-        import javafx.scene.Node;
-        import javafx.scene.control.RadioButton;
-        import javafx.scene.control.Toggle;
-        import javafx.scene.control.ToggleGroup;
-        import javafx.scene.input.MouseEvent;
-        import javafx.scene.layout.GridPane;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 
-        import java.net.URL;
-        import java.util.ResourceBundle;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 public class FleetSetupController implements Initializable {
 
@@ -33,10 +31,13 @@ public class FleetSetupController implements Initializable {
     private RadioButton carrierRadio;
 
     private ToggleGroup shipChoice;
+    private Ship currentShip;
 
-    private ShipType currentlyPlacing = ShipType.DESTROYER;
+    private Player currentPlayer;
 
-    public FleetSetupController(BattleshipsController battleshipsController) {this.battleshipsController = battleshipsController;}
+    public FleetSetupController(BattleshipsController battleshipsController) {
+        this.battleshipsController = battleshipsController;
+    }
 
     public void assignRadioButton(RadioButton button, ShipType type){
         button.setToggleGroup(shipChoice);
@@ -54,35 +55,45 @@ public class FleetSetupController implements Initializable {
         assignRadioButton(carrierRadio,ShipType.CARRIER);
         shipChoice.selectToggle(destroyerRadio);
 
-        shipChoice.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-            @Override
-            public void changed(ObservableValue<? extends Toggle> observableValue, Toggle toggle, Toggle t1) {
-                if (shipChoice.getSelectedToggle() != null) {
+        currentPlayer = battleshipsController.getFirstPlayer();
+        currentShip = currentPlayer.getPlayerShipByType((ShipType) shipChoice.getSelectedToggle().getUserData());
 
-                    System.out.println(shipChoice.getSelectedToggle().getUserData().toString());
-                    // Do something here with the userData of newly selected radioButton
-
-                }
+        shipChoice.selectedToggleProperty().addListener((observableValue, toggle, t1) -> {
+            if (shipChoice.getSelectedToggle() != null) {
+                GridUtils.populateGrid(fleetGridPane,battleshipsController.getTILE_SIZE(),battleshipsController.getGRID_SIZE());
+                currentShip = currentPlayer.getPlayerShipByType((ShipType) shipChoice.getSelectedToggle().getUserData());
+                updateGrid(currentPlayer);
             }
         });
-
 
         GridUtils.populateGrid(fleetGridPane,battleshipsController.getTILE_SIZE(),battleshipsController.getGRID_SIZE());
     }
 
+    private void updateGrid(Player player){
+        GridUtils.resetGridPane(fleetGridPane);
 
+        for (Ship s : currentPlayer.getPlayerShips()){
+            GridUtils.colorShip(s,"black",fleetGridPane);
+        }
 
+        GridUtils.colorShip(currentShip,"red",fleetGridPane);
+    }
 
-    public void clickGrid(MouseEvent event){
+    public void clickGrid(MouseEvent event) {
         Node clickedNode = event.getPickResult().getIntersectedNode();
 
-        double row = GridPane.getRowIndex(clickedNode);
-        double columnIndex = GridPane.getColumnIndex(clickedNode);
+        int row = GridPane.getRowIndex(clickedNode);
+        int columnIndex = GridPane.getColumnIndex(clickedNode);
+
+        Tile t = currentPlayer.getMyGridTileByRowAndColumnt(row,columnIndex);
 
 
+        if(currentShip.getClaimedTiles().contains(t))
+            currentShip.getClaimedTiles().remove(t);
+        else if(currentPlayer.checkIfTileIsSuitable(t,currentShip))
+            currentShip.getClaimedTiles().add(t);
 
-        clickedNode.setStyle("-fx-background-color: " + "black");
-        clickedNode.setStyle("");
 
+        updateGrid(currentPlayer);
     }
 }

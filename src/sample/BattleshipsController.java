@@ -34,32 +34,24 @@ public class BattleshipsController implements Initializable {
     private final IntegerProperty timeSeconds = new SimpleIntegerProperty(0);
     private Timeline timeline;
 
-    Tile[][] firstPlayerGrid;
-    Tile[][] secondPlayerGrid;
+    Player firstPlayer;
+    Player secondPlayer;
 
     private int GRID_SIZE = 10;
     private int TILE_SIZE = 500;
 
     private OnClickController onClickController;
 
-
-
-    private void createPlayersGrid(){
-
-        firstPlayerGrid = new Tile[GRID_SIZE][GRID_SIZE];
-        secondPlayerGrid = new Tile[GRID_SIZE][GRID_SIZE];
-
-    }
-
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         timerLabel.textProperty().bind(timeSeconds.asString());
         handleTimer();
 
-        createPlayersGrid();
-
         GridUtils.populateGrid(playerBoard,TILE_SIZE,GRID_SIZE);
         GridUtils.populateGrid(enemyBoard,TILE_SIZE,GRID_SIZE);
+
+        firstPlayer = new Player(GRID_SIZE);
+        secondPlayer = new Player(GRID_SIZE);
     }
 
     public void clickGrid(MouseEvent event){
@@ -102,5 +94,13 @@ public class BattleshipsController implements Initializable {
 
     public int getTILE_SIZE() {
         return TILE_SIZE;
+    }
+
+    public Player getFirstPlayer() {
+        return firstPlayer;
+    }
+
+    public Player getSecondPlayer() {
+        return secondPlayer;
     }
 }

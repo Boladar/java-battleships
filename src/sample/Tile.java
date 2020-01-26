@@ -2,25 +2,15 @@ package sample;
 
 public class Tile {
 
-    private boolean containsShip;
+
+    private final int row;
+    private final int column;
     private boolean isHit;
 
-    public Tile() {
-        containsShip = false;
+    public Tile(int row, int column) {
+        this.row = row;
+        this.column = column;
         isHit = false;
-    }
-
-    public Tile(boolean containsShip, boolean isHit) {
-        this.containsShip = containsShip;
-        this.isHit = isHit;
-    }
-
-    public boolean isContainsShip() {
-        return containsShip;
-    }
-
-    public void setContainsShip(boolean containsShip) {
-        this.containsShip = containsShip;
     }
 
     public boolean isHit() {
@@ -29,5 +19,13 @@ public class Tile {
 
     public void setHit(boolean hit) {
         isHit = hit;
+    }
+
+    public int getRow() {
+        return row;
+    }
+
+    public int getColumn() {
+        return column;
     }
 }

@@ -31,7 +31,7 @@
                </VBox.margin>
             </HBox>
             <Separator prefWidth="200.0" />
-             <GridPane fx:id="fleetGridPane" alignment="CENTER" gridLinesVisible="true" onMouseClicked="#clickGrid">
+             <GridPane fx:id="fleetGridPane" alignment="CENTER" gridLinesVisible="true" onMousePressed="#clickGrid">
              </GridPane>
             <Separator prefWidth="200.0" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">

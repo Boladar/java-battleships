@@ -63,7 +63,7 @@ public class NewGamePopupController implements Initializable {
     }
 
     public void startNewGame() throws IOException {
-        closeStage();// we close the old stage
+        closeStage();
         Stage stage = new Stage();
         stage.setTitle("Fleet Setup");
         Pane myPane = null;
