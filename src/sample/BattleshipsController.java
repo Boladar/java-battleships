@@ -8,17 +8,12 @@ import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
-import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -39,43 +34,21 @@ public class BattleshipsController implements Initializable {
     private final IntegerProperty timeSeconds = new SimpleIntegerProperty(0);
     private Timeline timeline;
 
-    private final int GRID_SIZE = 10;
-    private final int TILE_SIZE = 500;
+    Tile[][] firstPlayerGrid;
+    Tile[][] secondPlayerGrid;
+
+    private int GRID_SIZE = 10;
+    private int TILE_SIZE = 500;
 
     private OnClickController onClickController;
 
-    private Label createFieldLabel(String text){
-        Label label = new Label();
 
-        label.setAlignment(Pos.CENTER);
-        label.setTextAlignment(TextAlignment.CENTER);
-        label.setContentDisplay(ContentDisplay.CENTER);
-        label.setFont(Font.font("Courier-new",20));
-        label.setText(text);
-        label.setPrefSize(TILE_SIZE,TILE_SIZE);
 
-        return label;
-    }
+    private void createPlayersGrid(){
 
-    private void populateGrid(GridPane target){
+        firstPlayerGrid = new Tile[GRID_SIZE][GRID_SIZE];
+        secondPlayerGrid = new Tile[GRID_SIZE][GRID_SIZE];
 
-        target.setMaxSize(TILE_SIZE*GRID_SIZE,TILE_SIZE*GRID_SIZE);
-        target.setPrefSize(TILE_SIZE,TILE_SIZE);
-
-        for(int i =0; i <= GRID_SIZE;i++){
-            for(int j = 0; j <= GRID_SIZE;j++){
-                if( i == 0 && j != 0){
-                    target.add(createFieldLabel(Integer.toString(j)),i,j);
-                }
-                else if (i != 0 && j == 0){
-                    target.add(createFieldLabel(String.valueOf((char)(i - 1 + 'A'))),i,j);
-                }
-                else{
-                    Pane pane = new Pane();
-                    target.add(pane,i,j);
-                }
-            }
-        }
     }
 
     @Override
@@ -83,8 +56,10 @@ public class BattleshipsController implements Initializable {
         timerLabel.textProperty().bind(timeSeconds.asString());
         handleTimer();
 
-        populateGrid(playerBoard);
-        populateGrid(enemyBoard);
+        createPlayersGrid();
+
+        GridUtils.populateGrid(playerBoard,TILE_SIZE,GRID_SIZE);
+        GridUtils.populateGrid(enemyBoard,TILE_SIZE,GRID_SIZE);
     }
 
     public void clickGrid(MouseEvent event){
@@ -96,7 +71,7 @@ public class BattleshipsController implements Initializable {
 
     }
 
-    public void newGame() throws IOException {
+    public void showNewGamePopup() throws IOException {
         Stage defStage = new Stage();
         FXMLLoader loader = new FXMLLoader();
         NewGamePopupController controller = new NewGamePopupController(this);//calling class controller
@@ -104,7 +79,7 @@ public class BattleshipsController implements Initializable {
         Parent frame = loader.load(getClass().getResource("newGamePopup.fxml").openStream());
         Scene sceneDef = new Scene(frame);
 
-        defStage.setTitle("New Game");
+        defStage.setTitle("New Game Settings");
         defStage.setScene(sceneDef);
         defStage.show();
     }
@@ -121,4 +96,11 @@ public class BattleshipsController implements Initializable {
         timeline.play();
     }
 
+    public int getGRID_SIZE() {
+        return GRID_SIZE;
+    }
+
+    public int getTILE_SIZE() {
+        return TILE_SIZE;
+    }
 }
