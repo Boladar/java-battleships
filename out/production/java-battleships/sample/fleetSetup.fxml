@@ -1,13 +1,48 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox>
+      <VBox alignment="CENTER">
          <children>
-             <GridPane fx:id="fleetGridPane" alignment="CENTER" gridLinesVisible="true">
+            <HBox alignment="CENTER">
+               <children>
+                  <Label alignment="CENTER" contentDisplay="CENTER" text="Label" textAlignment="CENTER">
+                     <font>
+                        <Font name="Courier New Bold" size="25.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <RadioButton fx:id="destroyerRadio" mnemonicParsing="false" text="Destroyer(2)" />
+                  <RadioButton fx:id="submarineRadio" mnemonicParsing="false" text="Submarine(3)" />
+                  <RadioButton fx:id="cruiserRadio" mnemonicParsing="false" text="Cruiser(3)" />
+                  <RadioButton fx:id="battleshipRadio" mnemonicParsing="false" text="Battleship(4)" />
+                  <RadioButton fx:id="carrierRadio" mnemonicParsing="false" text="Carrier(5)" />
+               </children>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+            </HBox>
+            <Separator prefWidth="200.0" />
+             <GridPane fx:id="fleetGridPane" alignment="CENTER" gridLinesVisible="true" onMouseClicked="#clickGrid">
              </GridPane>
+            <Separator prefWidth="200.0" />
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+               <children>
+                  <Button mnemonicParsing="false" text="DONE" textAlignment="CENTER">
+                     <font>
+                        <Font name="Courier New" size="25.0" />
+                     </font>
+                  </Button>
+               </children>
+            </HBox>
          </children></VBox>
    </children>
 </AnchorPane>
