@@ -5,12 +5,14 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
@@ -34,8 +36,14 @@ public class BattleshipsController implements Initializable {
     private final IntegerProperty timeSeconds = new SimpleIntegerProperty(0);
     private Timeline timeline;
 
+    @FXML
+    private Button endTurnButton;
+
     Player firstPlayer;
     Player secondPlayer;
+
+    Player currentPlayer;
+    Player otherPlayer;
 
     private int GRID_SIZE = 10;
     private int TILE_SIZE = 500;
@@ -43,14 +51,12 @@ public class BattleshipsController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        timerLabel.textProperty().bind(timeSeconds.asString());
-        handleTimer();
 
         GridUtils.populateGrid(playerBoard,TILE_SIZE,GRID_SIZE);
         GridUtils.populateGrid(enemyBoard,TILE_SIZE,GRID_SIZE);
 
-        firstPlayer = new Player(GRID_SIZE);
-        secondPlayer = new Player(GRID_SIZE);
+        firstPlayer = new Player(GRID_SIZE, newTurnStrategy);
+        secondPlayer = new Player(GRID_SIZE, newTurnStrategy);
     }
 
     public void clickGrid(MouseEvent event){
@@ -59,6 +65,38 @@ public class BattleshipsController implements Initializable {
         System.out.println(clickedNode);
 
         //playerBoard.add(new ShipPart());
+
+    }
+
+    public void startGame(){
+        timerLabel.textProperty().bind(timeSeconds.asString());
+        handleTimer();
+
+        startPlayerTurn(firstPlayer,secondPlayer);
+    }
+
+    public void nextTurn(ActionEvent event){
+        System.out.println("next turn");
+    }
+
+    public void startPlayerTurn(Player currentPlayer, Player otherPlayer){
+
+        this.currentPlayer = currentPlayer;
+        this.otherPlayer = otherPlayer;
+        drawBoards();
+
+    }
+
+    public void drawBoards(){
+
+        GridUtils.resetGridPane(playerBoard);
+        GridUtils.resetGridPane(enemyBoard);
+
+        for (Ship s : currentPlayer.getPlayerShips()){
+            GridUtils.colorShip(s,"black",playerBoard);
+        }
+
+        GridUtils.paintHitTiles(playerBoard,currentPlayer,otherPlayer.getPlayerShips(),TILE_SIZE);
 
     }
 
@@ -102,4 +140,6 @@ public class BattleshipsController implements Initializable {
     public Player getSecondPlayer() {
         return secondPlayer;
     }
+
+
 }

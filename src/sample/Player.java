@@ -10,6 +10,8 @@ public class Player {
     private Tile[][] enemyGrid;
     private List<Ship> playerShips;
 
+    private final NewTurnStrategy newTurnStrategy;
+
     private void createTileGrid(Tile[][] target){
         for(int i = 0; i < gridSize;i++){
             for(int j = 0; j < gridSize;j++){
@@ -18,11 +20,12 @@ public class Player {
         }
     }
 
-    public Player(int gridSize) {
+    public Player(int gridSize, NewTurnStrategy newTurnStrategy) {
         this.gridSize = gridSize +1;
 
         myGrid = new Tile[gridSize+1][gridSize+1];
         enemyGrid = new Tile[gridSize+1][gridSize+1];
+        this.newTurnStrategy = newTurnStrategy;
 
         createTileGrid(myGrid);
         createTileGrid(enemyGrid);
@@ -69,5 +72,9 @@ public class Player {
 
     public List<Ship> getPlayerShips() {
         return playerShips;
+    }
+
+    public int getGridSize() {
+        return gridSize;
     }
 }

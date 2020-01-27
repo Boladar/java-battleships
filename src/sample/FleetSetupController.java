@@ -8,6 +8,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -74,7 +75,9 @@ public class FleetSetupController implements Initializable {
 
         doneButton.setOnAction(actionEvent -> {
             if( currentPlayer.equals(battleshipsController.getSecondPlayer())){
-
+                Stage stage = (Stage)doneButton.getScene().getWindow();
+                stage.close();
+                battleshipsController.startGame();
             }
 
             currentPlayer = battleshipsController.getSecondPlayer();

@@ -85,7 +85,7 @@
             </HBox>
             <HBox alignment="CENTER">
                <children>
-                  <Button fx:id="endTurnButton" alignment="CENTER" mnemonicParsing="false" text="END TURN" textAlignment="CENTER">
+                  <Button fx:id="endTurnButton" alignment="CENTER" mnemonicParsing="false" text="END TURN" textAlignment="CENTER" onAction="#nextTurn">
                      <font>
                         <Font name="Courier New" size="20.0" />
                      </font>

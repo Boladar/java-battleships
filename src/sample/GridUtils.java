@@ -1,6 +1,5 @@
 package sample;
 
-import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.ContentDisplay;
@@ -16,15 +15,32 @@ import java.util.Objects;
 
 public class GridUtils {
 
-    private static Label createFieldLabel(String text, double tileSize){
+    private static Label getBaseLabel(double tileSize){
         Label label = new Label();
 
         label.setAlignment(Pos.CENTER);
         label.setTextAlignment(TextAlignment.CENTER);
         label.setContentDisplay(ContentDisplay.CENTER);
+        label.setPrefSize(tileSize,tileSize);
+
+        return label;
+    }
+
+    private static Label createHitIndicator(double tileSize, Color color){
+        Label label = getBaseLabel(tileSize);
+
+        label.setFont(Font.font("Courier-new",20));
+        label.setTextFill(color);
+        label.setText("X");
+
+        return label;
+    }
+
+    private static Label createFieldLabel(String text, double tileSize){
+        Label label = getBaseLabel(tileSize);
+
         label.setFont(Font.font("Courier-new",20));
         label.setText(text);
-        label.setPrefSize(tileSize,tileSize);
 
         return label;
     }
@@ -50,6 +66,29 @@ public class GridUtils {
         }
     }
 
+    public static void paintHitTiles(GridPane target, Player targetPlayer, List<Ship> enemyShips ,int tileSize){
+
+        for(int i = 0; i < targetPlayer.getGridSize();i++){
+            for(int j = 0; j < targetPlayer.getGridSize();j++){
+                Tile t = targetPlayer.getMyGridTileByRowAndColumnt(i,j);
+
+                if(t.isHit()) {
+                    target.add(createHitIndicator(tileSize, Color.BLACK), t.getRow(), t.getColumn());
+                }
+            }
+
+        }
+
+        for(Ship s : targetPlayer.getPlayerShips()) {
+            for (Tile t : s.getClaimedTiles()) {
+                if (t.isHit()) {
+                    target.add(createHitIndicator(tileSize, Color.RED), t.getRow(), t.getColumn());
+                }
+            }
+        }
+
+    }
+
     public static void colorShip(Ship ship, String color, GridPane gridPane){
 
         List<Tile> tiles = ship.getClaimedTiles();
@@ -72,23 +111,12 @@ public class GridUtils {
         }
     }
 
-    public static void drawGridPane(Tile[][] data, GridPane target){
-
-        for (int i = 0; i < target.getColumnCount();i++){
-            for(int j = 0; j < target.getRowCount();j++){
-                Tile currnet = data[i][j];
-
-            }
-        }
-
-    }
-
     public static Node getNodeByRowColumnIndex (Integer row,Integer column, GridPane gridPane) {
         for (Node node : gridPane.getChildren()) {
             Integer rowIndex = GridPane.getRowIndex(node);
             Integer columnIndex = GridPane.getColumnIndex(node);
 
-            if(row == rowIndex && column == columnIndex)
+            if(row.equals(rowIndex) && column.equals(columnIndex))
                 return node;
         }
 
