@@ -73,7 +73,12 @@ public class FleetSetupController implements Initializable {
         GridUtils.populateGrid(fleetGridPane,battleshipsController.getTILE_SIZE(),battleshipsController.getGRID_SIZE());
 
         doneButton.setOnAction(actionEvent -> {
-            //currentPlayer =
+            if( currentPlayer.equals(battleshipsController.getSecondPlayer())){
+
+            }
+
+            currentPlayer = battleshipsController.getSecondPlayer();
+            updateGrid(currentPlayer);
         });
     }
 

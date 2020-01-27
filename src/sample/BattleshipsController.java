@@ -40,7 +40,6 @@ public class BattleshipsController implements Initializable {
     private int GRID_SIZE = 10;
     private int TILE_SIZE = 500;
 
-    private OnClickController onClickController;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
