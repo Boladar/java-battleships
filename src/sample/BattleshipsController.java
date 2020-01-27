@@ -53,6 +53,7 @@ public class BattleshipsController implements Initializable {
     private int GRID_SIZE = 10;
     private int TILE_SIZE = 500;
 
+    private boolean gameStarted = false;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -62,31 +63,60 @@ public class BattleshipsController implements Initializable {
     }
 
     public void clickGrid(MouseEvent event){
-        Node clickedNode = event.getPickResult().getIntersectedNode();
-        int row = GridPane.getRowIndex(clickedNode);
-        int columnIndex = GridPane.getColumnIndex(clickedNode);
+        if(gameStarted) {
 
-        Tile t = currentPlayer.getEnemyGridByTileByRowAndColumn(row,columnIndex);
-        Tile enemyTile = otherPlayer.getMyGridTileByRowAndColumn(row,columnIndex);
+            Node clickedNode = event.getPickResult()
+                                    .getIntersectedNode();
+            int row = GridPane.getRowIndex(clickedNode);
+            int columnIndex = GridPane.getColumnIndex(clickedNode);
 
-        if(!t.isHit() && movesLeft > 0){
-            t.setHit(true);
-            enemyTile.setHit(true);
-            movesLeft -= 1;
-            currentPlayer.setMovements(currentPlayer.getMovements() + 1);
+            Tile t = currentPlayer.getEnemyGridByTileByRowAndColumn(row, columnIndex);
+            Tile enemyTile = otherPlayer.getMyGridTileByRowAndColumn(row, columnIndex);
+
+            if (!t.isHit() && movesLeft > 0) {
+                t.setHit(true);
+                enemyTile.setHit(true);
+                movesLeft -= 1;
+                currentPlayer.setMovements(currentPlayer.getMovements() + 1);
+            }
+
+            drawBoards();
         }
-
-        drawBoards();
     }
 
     public void startGame(){
+        gameStarted = true;
+
         timerLabel.textProperty().bind(timeSeconds.asString());
         handleTimer();
 
         startPlayerTurn(firstPlayer,secondPlayer);
     }
 
+    public void showWinGame(String message){
+        Parent parent = null;
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            WinPopupController controller = new WinPopupController(message);
+            loader.setController(controller);
+            parent = loader.load(getClass().getResource("winPopup.fxml").openStream());
+            Scene scene = new Scene(parent);
+            Stage appStage = (Stage) endTurnButton.getScene().getWindow();
+            appStage.setScene(scene);
+            appStage.show();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void nextTurn(ActionEvent event){
+
+        if(firstPlayer.getPlayerHealth() == 0)
+            showWinGame("PLAYER 2 WINS");
+        else if( secondPlayer.getPlayerHealth() == 0)
+            showWinGame("PLAYER 1 WINS");
+        else
         currentPlayer.getNewTurnStrategy().newTurn(this);
     }
 
@@ -144,6 +174,10 @@ public class BattleshipsController implements Initializable {
         timeline.setCycleCount(Animation.INDEFINITE);
         timeSeconds.set(0);
         timeline.play();
+    }
+
+    public void setGRID_SIZE(int GRID_SIZE) {
+        this.GRID_SIZE = GRID_SIZE;
     }
 
     public int getGRID_SIZE() {

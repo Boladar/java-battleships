@@ -2,16 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="cdb932d9-7e58-4d94-93a9-e7b232ef17da" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/src/sample/WinPopupController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/sample/winPopup.fxml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/java-battleships/sample/FleetSetupController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-battleships/sample/FleetSetupController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/java-battleships/sample/NewGamePopupController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/java-battleships/sample/NewGamePopupController.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/BattleshipsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/BattleshipsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/FleetSetupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/FleetSetupController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/GridUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/GridUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/HotSeatPlayerStrategy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/HotSeatPlayerStrategy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/NewTurnController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/NewTurnController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/NewGamePopupController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/NewGamePopupController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/sample/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Player.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/battleships.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/battleships.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/sample/newTurn.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/newTurn.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/sample/Ship.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/sample/Ship.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -217,7 +215,7 @@
       <workItem from="1579971841463" duration="21436000" />
       <workItem from="1580036936220" duration="10591000" />
       <workItem from="1580068754531" duration="11980000" />
-      <workItem from="1580118043122" duration="20510000" />
+      <workItem from="1580118043122" duration="25894000" />
     </task>
     <servers />
   </component>
@@ -229,10 +227,10 @@
     <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="765" y="224" key="#com.intellij.ide.util.MemberChooser" timestamp="1580162481009">
+    <state x="765" y="224" key="#com.intellij.ide.util.MemberChooser" timestamp="1580167629388">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="765" y="224" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1580162481009" />
+    <state x="765" y="224" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1580167629388" />
     <state x="690" y="268" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1580124067084">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -249,22 +247,22 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="702" y="245" key="FileChooserDialogImpl/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1580053942228" />
-    <state width="1877" height="116" key="GridCell.Tab.0.bottom" timestamp="1580162132268">
+    <state width="1877" height="116" key="GridCell.Tab.0.bottom" timestamp="1580167739463">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="116" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1580162132268" />
-    <state width="1877" height="116" key="GridCell.Tab.0.center" timestamp="1580162132268">
+    <state width="1877" height="116" key="GridCell.Tab.0.bottom/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1580167739463" />
+    <state width="1877" height="116" key="GridCell.Tab.0.center" timestamp="1580167739463">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="116" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1580162132268" />
-    <state width="1877" height="116" key="GridCell.Tab.0.left" timestamp="1580162132268">
+    <state width="1877" height="116" key="GridCell.Tab.0.center/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1580167739463" />
+    <state width="1877" height="116" key="GridCell.Tab.0.left" timestamp="1580167739463">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="116" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1580162132268" />
-    <state width="1877" height="116" key="GridCell.Tab.0.right" timestamp="1580162132268">
+    <state width="1877" height="116" key="GridCell.Tab.0.left/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1580167739463" />
+    <state width="1877" height="116" key="GridCell.Tab.0.right" timestamp="1580167739463">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state width="1877" height="116" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1580162132268" />
+    <state width="1877" height="116" key="GridCell.Tab.0.right/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1580167739463" />
     <state width="1877" height="206" key="GridCell.Tab.1.bottom" timestamp="1580161875907">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -297,25 +295,16 @@
       <screen x="1920" y="0" width="1920" height="1040" />
     </state>
     <state x="2250" y="-8" width="800" height="855" key="dock-window-1/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1580161452747" />
-    <state x="702" y="131" key="refactoring.ChangeSignatureDialog" timestamp="1580142222933">
+    <state x="702" y="131" key="refactoring.ChangeSignatureDialog" timestamp="1580166134751">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="702" y="131" key="refactoring.ChangeSignatureDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1580142222933" />
+    <state x="702" y="131" key="refactoring.ChangeSignatureDialog/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1580166134751" />
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup" timestamp="1579988750559">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="623" y="225" width="672" height="678" key="search.everywhere.popup/0.0.1920.1040/1920.0.1920.1040@0.0.1920.1040" timestamp="1579988750559" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/sample/GridUtils.java</url>
-          <line>103</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <watches-manager>
       <configuration name="Application">
         <watch expression="t" />

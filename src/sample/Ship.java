@@ -6,7 +6,6 @@ import java.util.List;
 public class Ship {
 
     private int size;
-    private int health;
     private List<Tile> claimedTiles;
     private final ShipType type;
 
@@ -31,7 +30,6 @@ public class Ship {
                 break;
         }
 
-        this.health = size;
         claimedTiles = new ArrayList<>();
     }
 
@@ -92,7 +90,15 @@ public class Ship {
     }
 
     public int getHealth() {
-        return health;
+
+        int result = 0;
+
+        for(Tile t : claimedTiles){
+            if(!t.isHit())
+                result += 1;
+        }
+
+        return result;
     }
 
     public List<Tile> getClaimedTiles() {

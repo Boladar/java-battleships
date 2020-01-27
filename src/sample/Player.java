@@ -40,6 +40,17 @@ public class Player {
         playerShips.add(new Ship(ShipType.CARRIER));
     }
 
+    public int getPlayerHealth(){
+
+        int result = 0;
+
+        for(Ship s : playerShips){
+            result += s.getHealth();
+        }
+
+        return  result;
+    }
+
     public Boolean checkIfTileIsSuitable(Tile tile, Ship ship) {
 
         for (Ship s : playerShips) {

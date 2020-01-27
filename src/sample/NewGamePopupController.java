@@ -72,6 +72,9 @@ public class NewGamePopupController implements Initializable {
         ((Stage) startGameButton.getScene().getWindow()).close();
         Stage stage = new Stage();
         stage.setTitle("Fleet Setup");
+
+        battleshipsController.setGRID_SIZE( gridSizeChoiceBox.getValue() );
+
         Pane myPane = null;
 
         FXMLLoader loader = new FXMLLoader();
