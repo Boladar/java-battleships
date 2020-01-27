@@ -27,12 +27,14 @@ public class NewGamePopupController implements Initializable {
     @FXML
     private Button startGameButton;
 
+    private ToggleGroup gameTypeGroup;
+
     public NewGamePopupController(BattleshipsController battleshipsController) {this.battleshipsController = battleshipsController;}
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        ToggleGroup gameTypeGroup = new ToggleGroup();
+        gameTypeGroup = new ToggleGroup();
         singlePlayerRadio.setToggleGroup(gameTypeGroup);
         hotSeatRadio.setToggleGroup(gameTypeGroup);
 
@@ -46,20 +48,28 @@ public class NewGamePopupController implements Initializable {
 
         startGameButton.setOnAction(actionEvent -> {
             try {
-                startNewGame();
+
+                if(gameTypeGroup.getSelectedToggle().equals(singlePlayerRadio)){
+
+                    battleshipsController.setFirstPlayer( new Player(battleshipsController.getGRID_SIZE(),new SinglePlayerTurnStrategy()));
+                    battleshipsController.setSecondPlayer( new Player(battleshipsController.getGRID_SIZE(),new AiTurnStrategy()));
+
+                }else{
+
+                    battleshipsController.setFirstPlayer( new Player(battleshipsController.getGRID_SIZE(),new HotSeatPlayerStrategy()));
+                    battleshipsController.setSecondPlayer( new Player(battleshipsController.getGRID_SIZE(),new HotSeatPlayerStrategy()));
+
+                }
+
+                openFleetSetup();
             } catch (IOException e) {
                 e.printStackTrace();
             }
         });
     }
 
-    private void closeStage()
-    {
+    public void openFleetSetup() throws IOException {
         ((Stage) startGameButton.getScene().getWindow()).close();
-    }
-
-    public void startNewGame() throws IOException {
-        closeStage();
         Stage stage = new Stage();
         stage.setTitle("Fleet Setup");
         Pane myPane = null;

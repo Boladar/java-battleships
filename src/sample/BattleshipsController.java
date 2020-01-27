@@ -54,9 +54,6 @@ public class BattleshipsController implements Initializable {
 
         GridUtils.populateGrid(playerBoard,TILE_SIZE,GRID_SIZE);
         GridUtils.populateGrid(enemyBoard,TILE_SIZE,GRID_SIZE);
-
-        firstPlayer = new Player(GRID_SIZE, newTurnStrategy);
-        secondPlayer = new Player(GRID_SIZE, newTurnStrategy);
     }
 
     public void clickGrid(MouseEvent event){
@@ -137,9 +134,23 @@ public class BattleshipsController implements Initializable {
         return firstPlayer;
     }
 
+    public void setFirstPlayer(Player firstPlayer) {
+        this.firstPlayer = firstPlayer;
+    }
+
     public Player getSecondPlayer() {
         return secondPlayer;
     }
 
+    public void setSecondPlayer(Player secondPlayer) {
+        this.secondPlayer = secondPlayer;
+    }
 
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public Player getOtherPlayer() {
+        return otherPlayer;
+    }
 }
