@@ -25,10 +25,10 @@ public class NewTurnController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         if(battleshipsController.otherPlayer.equals(battleshipsController.getFirstPlayer())){
-            playerLabel.setText("Player 1");
+            playerLabel.setText("PLAYER 1");
         }
         else{
-            playerLabel.setText("Player 2");
+            playerLabel.setText("PLAYER 2");
         }
 
         newTurnButton.setOnAction(actionEvent -> {

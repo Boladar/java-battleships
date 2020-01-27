@@ -32,6 +32,9 @@ public class BattleshipsController implements Initializable {
     private GridPane enemyBoard;
 
     @FXML
+    private Label turnLabel;
+
+    @FXML
     private Label timerLabel;
     private final IntegerProperty timeSeconds = new SimpleIntegerProperty(0);
     private Timeline timeline;
@@ -44,6 +47,8 @@ public class BattleshipsController implements Initializable {
 
     Player currentPlayer;
     Player otherPlayer;
+
+    private int movesLeft = 1;
 
     private int GRID_SIZE = 10;
     private int TILE_SIZE = 500;
@@ -58,11 +63,20 @@ public class BattleshipsController implements Initializable {
 
     public void clickGrid(MouseEvent event){
         Node clickedNode = event.getPickResult().getIntersectedNode();
+        int row = GridPane.getRowIndex(clickedNode);
+        int columnIndex = GridPane.getColumnIndex(clickedNode);
 
-        System.out.println(clickedNode);
+        Tile t = currentPlayer.getEnemyGridByTileByRowAndColumn(row,columnIndex);
+        Tile enemyTile = otherPlayer.getMyGridTileByRowAndColumn(row,columnIndex);
 
-        //playerBoard.add(new ShipPart());
+        if(!t.isHit() && movesLeft > 0){
+            t.setHit(true);
+            enemyTile.setHit(true);
+            movesLeft -= 1;
+            currentPlayer.setMovements(currentPlayer.getMovements() + 1);
+        }
 
+        drawBoards();
     }
 
     public void startGame(){
@@ -73,10 +87,15 @@ public class BattleshipsController implements Initializable {
     }
 
     public void nextTurn(ActionEvent event){
-        System.out.println("next turn");
+        currentPlayer.getNewTurnStrategy().newTurn(this);
     }
 
     public void startPlayerTurn(Player currentPlayer, Player otherPlayer){
+        if(currentPlayer.getMovements() == otherPlayer.getMovements()){
+            turnLabel.setText(Integer.toString(currentPlayer.getMovements()));
+        }
+
+        movesLeft = 1;
 
         this.currentPlayer = currentPlayer;
         this.otherPlayer = otherPlayer;
@@ -84,17 +103,22 @@ public class BattleshipsController implements Initializable {
 
     }
 
-    public void drawBoards(){
-
+    public void resetBoards(){
+        GridUtils.populateGrid(playerBoard,TILE_SIZE,GRID_SIZE);
+        GridUtils.populateGrid(enemyBoard,TILE_SIZE,GRID_SIZE);
         GridUtils.resetGridPane(playerBoard);
         GridUtils.resetGridPane(enemyBoard);
+    }
+
+    public void drawBoards(){
+
+        resetBoards();
 
         for (Ship s : currentPlayer.getPlayerShips()){
             GridUtils.colorShip(s,"black",playerBoard);
         }
 
-        GridUtils.paintHitTiles(playerBoard,currentPlayer,otherPlayer.getPlayerShips(),TILE_SIZE);
-
+        GridUtils.PaintHitMarks(playerBoard,enemyBoard,currentPlayer,otherPlayer,TILE_SIZE);
     }
 
     public void showNewGamePopup() throws IOException {

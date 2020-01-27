@@ -47,6 +47,10 @@ public class GridUtils {
 
     public static void populateGrid(GridPane target, double tileSize, double gridSize){
 
+        Node node = target.getChildren().get(0);
+        target.getChildren().clear();
+        target.getChildren().add(0,node);
+
         target.setMaxSize(tileSize*gridSize,tileSize*gridSize);
         target.setPrefSize(tileSize,tileSize);
 
@@ -66,27 +70,40 @@ public class GridUtils {
         }
     }
 
-    public static void paintHitTiles(GridPane target, Player targetPlayer, List<Ship> enemyShips ,int tileSize){
-
-        for(int i = 0; i < targetPlayer.getGridSize();i++){
-            for(int j = 0; j < targetPlayer.getGridSize();j++){
-                Tile t = targetPlayer.getMyGridTileByRowAndColumnt(i,j);
-
-                if(t.isHit()) {
-                    target.add(createHitIndicator(tileSize, Color.BLACK), t.getRow(), t.getColumn());
-                }
-            }
-
-        }
-
+    private static void paintHitShips(GridPane targetGrid,Player targetPlayer,int tileSize){
         for(Ship s : targetPlayer.getPlayerShips()) {
             for (Tile t : s.getClaimedTiles()) {
                 if (t.isHit()) {
-                    target.add(createHitIndicator(tileSize, Color.RED), t.getRow(), t.getColumn());
+                    targetGrid.add(createHitIndicator(tileSize, Color.RED), t.getColumn(), t.getRow());
                 }
             }
         }
+    }
 
+    private static void paintHitTiles(GridPane playerGrid, GridPane enemyGrid, Player targetPlayer,int tileSize){
+
+        for(int i = 0; i < targetPlayer.getGridSize();i++){
+            for(int j = 0; j < targetPlayer.getGridSize();j++){
+                Tile t = targetPlayer.getMyGridTileByRowAndColumn(i,j);
+
+                if(t.isHit()) {
+                    playerGrid.add(createHitIndicator(tileSize, Color.BLACK), t.getColumn(), t.getRow());
+                }
+
+                Tile enemyT = targetPlayer.getEnemyGridByTileByRowAndColumn(i,j);
+                if(enemyT.isHit()){
+                    enemyGrid.add(createHitIndicator(tileSize, Color.BLACK),enemyT.getColumn(),enemyT.getRow());
+                }
+            }
+
+        }
+
+    }
+
+    public static void PaintHitMarks(GridPane playerGrid, GridPane enemyGrid, Player targetPlayer, Player otherPlayer, int tileSize){
+        paintHitTiles(playerGrid,enemyGrid,targetPlayer,tileSize);
+        paintHitShips(playerGrid,targetPlayer,tileSize);
+        paintHitShips(enemyGrid,otherPlayer,tileSize);
     }
 
     public static void colorShip(Ship ship, String color, GridPane gridPane){

@@ -10,21 +10,23 @@ public class Player {
     private Tile[][] enemyGrid;
     private List<Ship> playerShips;
 
+    private int movements = 0;
+
     private final NewTurnStrategy newTurnStrategy;
 
-    private void createTileGrid(Tile[][] target){
-        for(int i = 0; i < gridSize;i++){
-            for(int j = 0; j < gridSize;j++){
-                target[i][j] = new Tile(i,j);
+    private void createTileGrid(Tile[][] target) {
+        for (int i = 0; i < gridSize; i++) {
+            for (int j = 0; j < gridSize; j++) {
+                target[i][j] = new Tile(i, j);
             }
         }
     }
 
     public Player(int gridSize, NewTurnStrategy newTurnStrategy) {
-        this.gridSize = gridSize +1;
+        this.gridSize = gridSize + 1;
 
-        myGrid = new Tile[gridSize+1][gridSize+1];
-        enemyGrid = new Tile[gridSize+1][gridSize+1];
+        myGrid = new Tile[gridSize + 1][gridSize + 1];
+        enemyGrid = new Tile[gridSize + 1][gridSize + 1];
         this.newTurnStrategy = newTurnStrategy;
 
         createTileGrid(myGrid);
@@ -38,10 +40,11 @@ public class Player {
         playerShips.add(new Ship(ShipType.CARRIER));
     }
 
-    public Boolean checkIfTileIsSuitable(Tile tile, Ship ship){
+    public Boolean checkIfTileIsSuitable(Tile tile, Ship ship) {
 
-        for(Ship s : playerShips){
-            if( s.getClaimedTiles().contains(tile))
+        for (Ship s : playerShips) {
+            if (s.getClaimedTiles()
+                 .contains(tile))
                 return false;
         }
 
@@ -51,15 +54,20 @@ public class Player {
 
     public Ship getPlayerShipByType(ShipType type) {
 
-        for (Ship ship : playerShips){
-            if(ship.getType().equals(type))
-                return  ship;
+        for (Ship ship : playerShips) {
+            if (ship.getType()
+                    .equals(type))
+                return ship;
         }
         return null;
     }
 
-    public Tile getMyGridTileByRowAndColumnt(int row, int column){
+    public Tile getMyGridTileByRowAndColumn(int row, int column) {
         return myGrid[row][column];
+    }
+
+    public Tile getEnemyGridByTileByRowAndColumn(int row, int column) {
+        return enemyGrid[row][column];
     }
 
     public Tile[][] getMyGrid() {
@@ -76,5 +84,17 @@ public class Player {
 
     public int getGridSize() {
         return gridSize;
+    }
+
+    public NewTurnStrategy getNewTurnStrategy() {
+        return newTurnStrategy;
+    }
+
+    public int getMovements() {
+        return movements;
+    }
+
+    public void setMovements(int movements) {
+        this.movements = movements;
     }
 }

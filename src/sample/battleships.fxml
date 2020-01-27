@@ -69,7 +69,7 @@
                   <Separator orientation="VERTICAL" prefHeight="200.0" style="-fx-background-color: black; -fx-border-radius: 2;" />
                   <TitledPane alignment="CENTER" contentDisplay="CENTER" text="ENEMY FLEET" textAlignment="CENTER">
                      <content>
-                        <GridPane fx:id="enemyBoard" alignment="CENTER" gridLinesVisible="true" />
+                        <GridPane fx:id="enemyBoard" alignment="CENTER" gridLinesVisible="true" onMousePressed="#clickGrid" />
                      </content>
                      <font>
                         <Font name="Courier New" size="20.0" />
@@ -85,7 +85,7 @@
             </HBox>
             <HBox alignment="CENTER">
                <children>
-                  <Button fx:id="endTurnButton" alignment="CENTER" mnemonicParsing="false" text="END TURN" textAlignment="CENTER" onAction="#nextTurn">
+                  <Button fx:id="endTurnButton" alignment="CENTER" mnemonicParsing="false" onAction="#nextTurn" text="END TURN" textAlignment="CENTER">
                      <font>
                         <Font name="Courier New" size="20.0" />
                      </font>

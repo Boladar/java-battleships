@@ -10,7 +10,6 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -101,7 +100,7 @@ public class FleetSetupController implements Initializable {
         int row = GridPane.getRowIndex(clickedNode);
         int columnIndex = GridPane.getColumnIndex(clickedNode);
 
-        Tile t = currentPlayer.getMyGridTileByRowAndColumnt(row,columnIndex);
+        Tile t = currentPlayer.getMyGridTileByRowAndColumn(row,columnIndex);
 
 
         if(currentShip.getClaimedTiles().contains(t))

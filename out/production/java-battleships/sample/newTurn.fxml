@@ -6,20 +6,21 @@
 
 <AnchorPane xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <HBox>
+            <HBox alignment="CENTER">
                <children>
-                  <Label fx:id="playerLabel">
+                  <Label fx:id="playerLabel" alignment="CENTER" contentDisplay="CENTER" textAlignment="CENTER">
                      <font>
                         <Font name="Courier New Bold" size="25.0" />
                      </font>
                   </Label>
                </children>
             </HBox>
-            <HBox>
+            <Separator prefWidth="200.0" />
+            <HBox alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" text="NEW TURN">
+                  <Button fx:id="newTurnButton" alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" text="NEW TURN" textAlignment="CENTER">
                      <font>
                         <Font name="Courier New Bold" size="25.0" />
                      </font>
