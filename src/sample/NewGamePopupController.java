@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 public class NewGamePopupController implements Initializable {
 
     private final BattleshipsController battleshipsController;
+    private  Boolean isSingleplayer;
 
     @FXML
     private RadioButton singlePlayerRadio;
@@ -39,8 +40,10 @@ public class NewGamePopupController implements Initializable {
         hotSeatRadio.setToggleGroup(gameTypeGroup);
 
         gameTypeGroup.selectToggle(singlePlayerRadio);
+        isSingleplayer = true;
 
-        for (int i = 5; i <= 15; i++) {
+
+        for (int i = 8; i <= 15; i++) {
             gridSizeChoiceBox.getItems()
                              .add(i);
         }
@@ -51,13 +54,15 @@ public class NewGamePopupController implements Initializable {
 
                 if(gameTypeGroup.getSelectedToggle().equals(singlePlayerRadio)){
 
-                    battleshipsController.setFirstPlayer( new Player(battleshipsController.getGRID_SIZE(),new SinglePlayerTurnStrategy()));
-                    battleshipsController.setSecondPlayer( new Player(battleshipsController.getGRID_SIZE(),new AiTurnStrategy()));
+                    battleshipsController.setFirstPlayer( new Player(gridSizeChoiceBox.getValue(),new SinglePlayerTurnStrategy()));
+                    battleshipsController.setSecondPlayer( new Player(gridSizeChoiceBox.getValue(),new AiTurnStrategy()));
+                    isSingleplayer = true;
 
                 }else{
 
-                    battleshipsController.setFirstPlayer( new Player(battleshipsController.getGRID_SIZE(),new HotSeatPlayerStrategy()));
-                    battleshipsController.setSecondPlayer( new Player(battleshipsController.getGRID_SIZE(),new HotSeatPlayerStrategy()));
+                    battleshipsController.setFirstPlayer( new Player(gridSizeChoiceBox.getValue(),new HotSeatPlayerStrategy()));
+                    battleshipsController.setSecondPlayer( new Player(gridSizeChoiceBox.getValue(),new HotSeatPlayerStrategy()));
+                    isSingleplayer = false;
 
                 }
 
@@ -78,7 +83,7 @@ public class NewGamePopupController implements Initializable {
         Pane myPane = null;
 
         FXMLLoader loader = new FXMLLoader();
-        FleetSetupController controller = new FleetSetupController(this.battleshipsController);//calling class controller
+        FleetSetupController controller = new FleetSetupController(this.battleshipsController, isSingleplayer);//calling class controller
         loader.setController(controller);
 
         myPane = loader.load(getClass().getResource("fleetSetup.fxml").openStream());

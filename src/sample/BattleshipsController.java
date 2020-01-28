@@ -97,9 +97,9 @@ public class BattleshipsController implements Initializable {
         Parent parent = null;
         try {
             FXMLLoader loader = new FXMLLoader();
-            WinPopupController controller = new WinPopupController(message);
+            WinScreenController controller = new WinScreenController(message);
             loader.setController(controller);
-            parent = loader.load(getClass().getResource("winPopup.fxml").openStream());
+            parent = loader.load(getClass().getResource("winScreen.fxml").openStream());
             Scene scene = new Scene(parent);
             Stage appStage = (Stage) endTurnButton.getScene().getWindow();
             appStage.setScene(scene);
@@ -117,7 +117,7 @@ public class BattleshipsController implements Initializable {
         else if( secondPlayer.getPlayerHealth() == 0)
             showWinGame("PLAYER 1 WINS");
         else
-        currentPlayer.getNewTurnStrategy().newTurn(this);
+        otherPlayer.getNewTurnStrategy().newTurn(this,otherPlayer, currentPlayer);
     }
 
     public void startPlayerTurn(Player currentPlayer, Player otherPlayer){
@@ -130,7 +130,6 @@ public class BattleshipsController implements Initializable {
         this.currentPlayer = currentPlayer;
         this.otherPlayer = otherPlayer;
         drawBoards();
-
     }
 
     public void resetBoards(){

@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class WinPopupController implements Initializable {
+public class WinScreenController implements Initializable {
 
     @FXML
     private Label winLabel;
@@ -20,7 +20,7 @@ public class WinPopupController implements Initializable {
 
     private final String text;
 
-    public WinPopupController(String text) {this.text = text;}
+    public WinScreenController(String text) {this.text = text;}
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
