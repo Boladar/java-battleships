@@ -5,6 +5,7 @@ import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
+import javafx.concurrent.ScheduledService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -36,8 +37,6 @@ public class BattleshipsController implements Initializable {
 
     @FXML
     private Label timerLabel;
-    private final IntegerProperty timeSeconds = new SimpleIntegerProperty(0);
-    private Timeline timeline;
 
     @FXML
     private Button endTurnButton;
@@ -87,8 +86,10 @@ public class BattleshipsController implements Initializable {
     public void startGame(){
         gameStarted = true;
 
-        timerLabel.textProperty().bind(timeSeconds.asString());
-        handleTimer();
+        timerLabel.setText("0");
+        ScheduledService<Void> service = new UpdateTimeLabel(timerLabel);
+        service.setPeriod(Duration.seconds(1));
+        service.start();
 
         startPlayerTurn(firstPlayer,secondPlayer);
     }
@@ -161,18 +162,6 @@ public class BattleshipsController implements Initializable {
         defStage.setTitle("New Game Settings");
         defStage.setScene(sceneDef);
         defStage.show();
-    }
-
-    private void updateTime() {
-        int seconds = timeSeconds.get();
-        timeSeconds.set(seconds + 1);
-    }
-
-    private void handleTimer(){
-        timeline = new Timeline(new KeyFrame(Duration.seconds(1),evt -> updateTime()));
-        timeline.setCycleCount(Animation.INDEFINITE);
-        timeSeconds.set(0);
-        timeline.play();
     }
 
     public void setGRID_SIZE(int GRID_SIZE) {
