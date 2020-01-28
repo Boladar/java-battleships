@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -79,6 +80,11 @@ public class NewGamePopupController implements Initializable {
         stage.setTitle("Fleet Setup");
 
         battleshipsController.setGRID_SIZE( gridSizeChoiceBox.getValue() );
+
+        Color selectedColor = fleetColorPicker.getValue();
+
+        battleshipsController.getFirstPlayer().setFleetColor(selectedColor);
+        battleshipsController.getSecondPlayer().setFleetColor(selectedColor);
 
         Pane myPane = null;
 

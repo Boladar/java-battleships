@@ -145,7 +145,7 @@ public class BattleshipsController implements Initializable {
         resetBoards();
 
         for (Ship s : currentPlayer.getPlayerShips()){
-            GridUtils.colorShip(s,"black",playerBoard);
+            GridUtils.colorShip(s,currentPlayer.getFleetColor(),playerBoard);
         }
 
         GridUtils.PaintHitMarks(playerBoard,enemyBoard,currentPlayer,otherPlayer,TILE_SIZE);

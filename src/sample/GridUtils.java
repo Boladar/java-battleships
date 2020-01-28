@@ -2,6 +2,7 @@ package sample;
 
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.ColorPicker;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
@@ -106,7 +107,7 @@ public class GridUtils {
         paintHitShips(enemyGrid,otherPlayer,tileSize);
     }
 
-    public static void colorShip(Ship ship, String color, GridPane gridPane){
+    public static void colorShip(Ship ship, Color color, GridPane gridPane){
 
         List<Tile> tiles = ship.getClaimedTiles();
 
@@ -122,9 +123,16 @@ public class GridUtils {
         }
     }
 
-    public static void colorNode(Node target, String color){
+    public static void colorNode(Node target, Color color){
+
+        double r = color.getRed() * 255;
+        double g = color.getGreen() * 255;
+        double b = color.getBlue() * 255;
+
+
+
         if(target != null){
-            target.setStyle("-fx-background-color: " + color + ";");
+            target.setStyle("-fx-background-color: " + "rgb(" + r + "," + g  +"," + b + ")" + ";");
         }
     }
 

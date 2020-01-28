@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.scene.paint.Color;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,8 @@ public class Player {
     private Tile[][] myGrid;
     private Tile[][] enemyGrid;
     private List<Ship> playerShips;
+
+    private Color fleetColor;
 
     private int movements = 0;
 
@@ -107,5 +111,13 @@ public class Player {
 
     public void setMovements(int movements) {
         this.movements = movements;
+    }
+
+    public Color getFleetColor() {
+        return fleetColor;
+    }
+
+    public void setFleetColor(Color fleetColor) {
+        this.fleetColor = fleetColor;
     }
 }

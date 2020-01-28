@@ -8,6 +8,7 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -42,6 +43,7 @@ public class FleetSetupController implements Initializable {
     private Ship currentShip;
 
     private Player currentPlayer;
+
 
     public FleetSetupController(BattleshipsController battleshipsController, Boolean isSingleplayer) {
         this.battleshipsController = battleshipsController;
@@ -86,13 +88,17 @@ public class FleetSetupController implements Initializable {
                 }
 
                 currentPlayer = battleshipsController.getSecondPlayer();
+
+                GridUtils.populateGrid(fleetGridPane,battleshipsController.getTILE_SIZE(),battleshipsController.getGRID_SIZE());
+                GridUtils.resetGridPane(fleetGridPane);
                 updateGrid(currentPlayer);
             }
             else{
-                generateFleetPositions(battleshipsController.getSecondPlayer());
-                Stage stage = (Stage)doneButton.getScene().getWindow();
-                stage.close();
-                battleshipsController.startGame();
+            generateFleetPositions(battleshipsController.getSecondPlayer());
+
+            Stage stage = (Stage)doneButton.getScene().getWindow();
+            stage.close();
+            battleshipsController.startGame();
             }
         });
     }
@@ -161,13 +167,13 @@ public class FleetSetupController implements Initializable {
                 int endColumn = startColumn;
 
                 if (vertical) {
-                    endRow = startRow + s.getSize();
+                    endRow = startRow + s.getSize() -1 ;
                     if(checkVertical(target,endColumn,startRow,endRow)) {
                         addVertical(target, s, endColumn, startRow, endRow);
                         isPositionRight = true;
                     }
                 } else {
-                    endColumn = startColumn + s.getSize();
+                    endColumn = startColumn + s.getSize() - 1;
                     if(checkHorizontal(target,endRow,startColumn,endColumn)) {
                         addHorizontal(target, s, endRow, startColumn, endColumn);
                         isPositionRight = true;
@@ -179,13 +185,15 @@ public class FleetSetupController implements Initializable {
     }
 
     private void updateGrid(Player player){
+        GridUtils.populateGrid(fleetGridPane,battleshipsController.getTILE_SIZE(),battleshipsController.getGRID_SIZE());
         GridUtils.resetGridPane(fleetGridPane);
 
+
         for (Ship s : currentPlayer.getPlayerShips()){
-            GridUtils.colorShip(s,"black",fleetGridPane);
+            GridUtils.colorShip(s,player.getFleetColor(),fleetGridPane);
         }
 
-        GridUtils.colorShip(currentShip,"red",fleetGridPane);
+        GridUtils.colorShip(currentShip,Color.RED,fleetGridPane);
     }
 
     public void clickGrid(MouseEvent event) {
@@ -205,4 +213,6 @@ public class FleetSetupController implements Initializable {
 
         updateGrid(currentPlayer);
     }
+
+
 }

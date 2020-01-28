@@ -9,15 +9,7 @@
    <children>
       <VBox alignment="CENTER">
          <children>
-            <HBox alignment="CENTER">
-               <children>
-                  <Label alignment="CENTER" contentDisplay="CENTER" text="Label" textAlignment="CENTER">
-                     <font>
-                        <Font name="Courier New Bold" size="25.0" />
-                     </font>
-                  </Label>
-               </children>
-            </HBox>
+            <HBox alignment="CENTER" />
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
                   <RadioButton fx:id="destroyerRadio" mnemonicParsing="false" text="Destroyer(2)" />
@@ -36,7 +28,7 @@
             <Separator prefWidth="200.0" />
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                <children>
-                  <Button mnemonicParsing="false" text="DONE" textAlignment="CENTER" fx:id="doneButton">
+                  <Button fx:id="doneButton" mnemonicParsing="false" text="DONE" textAlignment="CENTER">
                      <font>
                         <Font name="Courier New" size="25.0" />
                      </font>
